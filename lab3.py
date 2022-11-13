@@ -12,7 +12,6 @@ import sys
 import os
 
 
-
 class Window(QMainWindow):
     def read_directory(self,elem):
         directory=elem.split(",")
