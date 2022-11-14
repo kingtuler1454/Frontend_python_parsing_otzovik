@@ -1,7 +1,5 @@
-import first_script
-import second_script
-import third_script
-import iterator
+import sys
+import os
 
 
 from PyQt5.QtGui import QFont
@@ -9,12 +7,15 @@ from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel
 
 
-import sys
-import os
+import first_script
+import second_script
+import third_script
+import iterator
 
 
 class Window(QMainWindow):
-    def read_directory(self, elem:str):
+    def read_directory(self, elem: str)->None:
+        """Read directory file and print text on labal opinion"""
         directory = elem.split(",")
         with open(directory[1], "r") as f:
             text = f.read()
@@ -30,7 +31,7 @@ class Window(QMainWindow):
                 else:
                     element = element[:100*i-1]+"\n"+element[100*i-1:]
             spisok.append(element)
-
+#бинарный поиск
         self.title_opinion.clear()
         self.plus_opinion.clear()
         self.minus_opinion.clear()
@@ -46,44 +47,49 @@ class Window(QMainWindow):
         self.minus_opinion.adjustSize()
         self.text_opinion.adjustSize()
     
-    def click_button_first_star(self):
-        """first star"""
+    def click_button_first_star(self)-> None:
+        """first star button and work iterat1"""
         elem = str(next(self.iterat_1))
         if elem == "['Абсолютный путь к файлу,Относительный путь к файлу,номер звезды']":
             elem = str(next(self.iterat_1))
         self.read_directory(elem)
 
-    def click_button_second_star(self):
-        """second star"""
+    def click_button_second_star(self) ->None:
+        """second star button and work iterat2"""
         elem = str(next(self.iterat_2))
         if elem == "['Абсолютный путь к файлу,Относительный путь к файлу,номер звезды']":
             elem = str(next(self.iterat_2))
         self.read_directory(elem)
 
-    def click_button_third_star(self):
-        """"third star"""
+    def click_button_third_star(self) ->None:
+        """"third star button and work iterat3"""
         elem = str(next(self.iterat_3))
         if elem == "['Абсолютный путь к файлу,Относительный путь к файлу,номер звезды']":
             elem = str(next(self.iterat_3))
         self.read_directory(elem)
 
-    def click_button_fourth_star(self):
-        """fourth star"""
+    def click_button_fourth_star(self)->None:
+        """fourth star button and work iterat4"""
         elem = str(next(self.iterat_4))
         if elem == "['Абсолютный путь к файлу,Относительный путь к файлу,номер звезды']":
             elem = str(next(self.iterat_4))
         self.read_directory(elem)
 
-    def click_button_fifth_star(self):
-        """"click_fifth_star"""
+    def click_button_fifth_star(self)->None:
+        """"click fifth star button and work iterat5"""
         elem = str(next(self.iterat_5))
         if elem == "['Абсолютный путь к файлу,Относительный путь к файлу,номер звезды']":
             elem = str(next(self.iterat_5))
         self.read_directory(elem)
 
-    def __init__(self):
-        """"init element"""
+
+
+    def __init__(self)->None:
+        """"create a window object"""
         super(Window, self).__init__()
+        if os.path.exists('classmates1.csv')==False:
+            first_script.first_script("")
+
         self.iterat_1 = iterator.Iterator("classmates1.csv", 1)
         self.iterat_2 = iterator.Iterator("classmates1.csv", 2)
         self.iterat_3 = iterator.Iterator("classmates1.csv", 3)
@@ -99,6 +105,8 @@ class Window(QMainWindow):
         self.main_text.move(0, 575)
         self.main_text.adjustSize()
         self.main_text.setFont(QFont("Times", 36))
+
+        self.button_succesesful=QtWidgets.QLabel(self)
 
         self.title_opinion = QtWidgets.QLabel(self)
         self.title_opinion.move(0, 275)
@@ -126,7 +134,7 @@ class Window(QMainWindow):
 
         self.button_copy_random_dataset = QtWidgets.QPushButton(self)
         self.button_copy_random_dataset.move(0, 150)
-        self. button_copy_random_dataset.setText("Перемешать элементы dataset")
+        self.button_copy_random_dataset.setText("Перемешать элементы")
         self.button_copy_random_dataset.setFixedWidth(200)
         self.button_copy_random_dataset.clicked.connect(third_script.third_script)
 
@@ -172,8 +180,8 @@ class Window(QMainWindow):
         self.text_opinion.setFont(QFont("Times", 13))
 
 
-def application():
-    """"Start aplication"""
+def application()->None:
+    """"Start aplication mainwindow"""
     app = QApplication(sys.argv)
     window = Window()
     window.setFixedSize(800, 600)

@@ -1,11 +1,16 @@
 import os
 from typing import Optional
+from playsound import playsound
 
 import csv
 
 
+import first_script
+
 def second_script(path: str) -> str:
     #read csv and copy dataset .../1/0001.txt =.../1_0001.txt
+    if os.path.exists('classmates1.csv')==False:
+        first_script.first_script("")
     with open("classmates1.csv", "r") as fh:
         reader = csv.reader(fh)  # (!) обратите внимание, что reader возвращает итератор
         spisok = list(reader)  # поэтому мы делаем приведение к типу list
@@ -19,6 +24,7 @@ def second_script(path: str) -> str:
             with open(os.path.join("second_dataset", element[2] + "_" + namefile[2]), "wb") as f:
                 f.write(text)
         content = True
+    playsound("audio_file.mp3")
 
 
 def script_2(name: str) ->None:

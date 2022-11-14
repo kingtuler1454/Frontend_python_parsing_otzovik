@@ -3,6 +3,7 @@ from typing import Optional
 
 import csv
 from tqdm import trange
+from playsound import playsound
 
 
 def first_script(path_dir: str) -> None:
@@ -16,7 +17,7 @@ def first_script(path_dir: str) -> None:
             for dirs, folder, files in os.walk(directory):
                 for element in files:
                     file_writer.writerow([str(dirs) + "/" + element, "dataset"+'/' + str(star) + "/" + element, star])
-
+    playsound("audio_file.mp3")
 
 
 def script_1(name: str) -> None:
